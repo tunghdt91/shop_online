@@ -1,0 +1,37 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <ul>
+        <%= gravatar_for @user, size: 52 %>
+        <li><%= @user.name %></li>
+        <li><%= @user.email %></li>
+          <li><%= link_to 'Edit account', edit_user_path()%></li>
+          <li><%= link_to 'Create post', home_path%></li>
+        <%  if checked_admin? %>
+          <%= link_to 'Delete', @user, method: :delete ,data: { confirm: 'Delete this account?'}%> 
+        <% end %>
+      </ul>
+    </section>
+    <section>
+      <%= render 'shared/stats' %>
+    </section>
+  </aside>
+  <div class="span8">
+    <% if @user.microposts.any? %>
+      <h3>Microposts (<%= @user.microposts.count %>)</h3>
+     
+      <% @microposts = @user.microposts.all %>
+      <% @microposts.each do |m|%>
+      
+        <div class="microposts">
+          <li><span class="content"><%= m.content %></span>
+              <span class="timestamp">
+              Posted <%= time_ago_in_words(m.created_at) %> ago.
+              </span>
+          </li>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

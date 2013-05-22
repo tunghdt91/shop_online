@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<table class="table1">
+  <tr>
+    <th>Date-Time</th>
+    <th>Customers</th>
+    <th>Product</th>
+    <th>Quantity</th>
+  </tr>
+
+<% @product_orders.each do |product_order| %>
+  <tr>
+    <td><%= Time.new.inspect%></td>
+    <td><%= product_order.order.user.name %></td>
+    <td><%= product_order.product.name %></td>
+    <td><%= product_order.quantity %></td>
+  </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Continues Shopping', root_path ,class: "btn btn-large btn-primary"%>

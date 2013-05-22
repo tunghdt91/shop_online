@@ -1,0 +1,46 @@
+
+<div class="div_text">
+<%if signed_in?%>
+<h1>List products in your cart</h1>
+Hello!    <t1><%= current_user.name %></t1>   this is yours cart:<br/>
+<ul>
+  <li>Press "Payment" to buy all products.</li>
+  <li>Press "Empty Carts" to delete carts.</li> 
+</ul>
+<br/>
+</div>
+<table class="table1">
+  <tr>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Price</th>
+  </tr>
+<% totalprice = 0 %>
+<% @products = Product.all %>
+<% a = session[:carts]%>
+<% @products.each do |product| %>
+  <% if(a.has_key?(:"#{product.id}"))%>
+  <tr>
+    <td><b><%= link_to product.name, "#" %></b></td>
+    <td><%= a[:"#{product.id}"] %></td>
+    <td><%= product.price %></td>
+    <% totalprice = totalprice +  product.price*a[:"#{product.id}"] %>
+    
+    
+  </tr>
+<% end %>
+<% end %>
+</table>
+
+
+<div class="div_text">
+Total price:  <p2><%= totalprice%></p2>
+</div>
+<%= link_to "Empty cart", delcart_path, method: "DELETE", class: "btn btn-large btn-primary" %>
+<%= link_to "Payment", orders_path, method: "POST", class: "btn btn-large btn-primary",data: { confirm: 'Are you sure?'}  %>
+<%else%>
+ <% flash[:errors] = "You must login first !"%>
+<%end%>
+
+
+

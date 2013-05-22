@@ -1,0 +1,27 @@
+
+[1mFrom:[0m /home/dt/workspace/railsprojects/shop_online/app/controllers/users_controller.rb @ line 29 UsersController#napthe:
+
+    [1;34m28[0m: [1;31mdef[0m [1;34mnapthe[0m
+ => [1;34m29[0m: 	binding.pry
+    [1;34m30[0m: 	@serial = params[[1;32m:serial[0m]
+    [1;34m31[0m: 	[1;31mif[0m @serial==[32m[1;32m"[0m[32m0979002506[1;32m"[0m[32m[0m
+    [1;34m32[0m: 		flash[[1;32m:success[0m] = [32m[1;32m"[0m[32mThank you .CheckEmail now.[1;32m"[0m[32m[0m
+    [1;34m33[0m: 		[1;34m[4mUserMailer[0m.welcome_email(@user).deliver
+    [1;34m34[0m: 	[1;31melse[0m
+    [1;34m35[0m: 		flash[[1;32m:errors[0m] = [32m[1;32m"[0m[32mNot found[1;32m"[0m[32m[0m
+    [1;34m36[0m: 		redirect_to napthe_path
+    [1;34m37[0m: 	[1;31mend[0m
+    [1;34m38[0m: 
+    [1;34m39[0m: [1;31mdef[0m [1;34maddpoint[0m
+    [1;34m40[0m: 	@user = [1;34m[4mUser[0m.find_by_id(params[[1;32m:id[0m].to_i)
+    [1;34m41[0m: 	@user.point+=[1;34m500[0m
+    [1;34m42[0m: 	[1;31mif[0m @user.update_attributes(params[[1;32m:user[0m])
+    [1;34m43[0m: 		flash[[1;32m:success[0m] = [32m[1;32m"[0m[32mDone[1;32m"[0m[32m[0m
+    [1;34m44[0m: 		redirect_to user_path
+    [1;34m45[0m: 	[1;31melse[0m
+    [1;34m46[0m: 		flash[[1;32m:errors[0m] = [32m[1;32m"[0m[32mErrors[1;32m"[0m[32m[0m
+    [1;34m47[0m: 		redirect_to napthe_path
+    [1;34m48[0m: 	[1;31mend[0m
+    [1;34m49[0m: [1;31mend[0m
+    [1;34m50[0m: [1;31mend[0m
+

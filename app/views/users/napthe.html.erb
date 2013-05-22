@@ -1,0 +1,15 @@
+<%= form_for :users, url: {action: "nt"} do|f| %>
+SERIAL NUMBER :
+  <input type="text" name ="serial" id = "content">
+
+  <input type="hidden" name ="id" value = <%=current_user.id %>>
+  <%= f.submit "Nap The"%>
+  <%end%>
+ IF SUSCCESS .CHECKMAIL END PASTE SERIAL TO BELOW
+
+ <%= form_for :users, url: {action: "addpoint"} do|f| %>
+SERIAL NUMBER :
+  <input type="text" name ="serial_point" id = "content">
+  <%= f.submit "OK"%>
+  <% binding.pry %>
+  <%end%>

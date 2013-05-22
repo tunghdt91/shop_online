@@ -1,0 +1,32 @@
+<%= render 'formsort'%>
+<br/>
+Danh sách sản phẩm theo mức giá <t1>tăng dần</t1>. 
+<div style="margin-bottom:13px;">  
+<% @products.each do |product| %>
+  <div class="item_id">
+   <div class="title"><%= link_to product.name, product %></div>
+
+    <div class="description"><%= product.description %></div>
+    <div class="price">Price:&nbsp$<p2><%= product.price %></p2></div>
+    <div class = "posted">
+      <% if product.product_microposts.any? %>
+      <p2><%= product.product_microposts.count %></p2> <b>comment<b>
+      <%else%>
+      <p2>0</p2><b>&nbspcomment</b>
+      <%end%>
+      </div>  
+    <% if signed_in? %>
+    <% if current_user.admin %>
+
+    <div class="cart"><%= link_to 'Edit', edit_product_path(product) %></div>
+    <div class="cart"><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+    <% else %>
+     <div class="cart"> <%= link_to 'Add to cart' ,  add_to_carts_path(product),class: "btn btn-medium btn-primary", method: "post", data: { confirm: 'Buy it?'} %></div>
+    <% end %>
+    <% end %>
+    
+ </div>
+<% end %>
+
+</div>
+

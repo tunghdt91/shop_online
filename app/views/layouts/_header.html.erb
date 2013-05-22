@@ -1,0 +1,78 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+
+      <%= link_to "iShop", root_path, id: "logo" %>
+      <nav>
+        <ul class="nav pull-right">
+              
+          <% if signed_in? %>
+          <% if checked_admin? %>
+          <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Sản phẩm
+                 <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'Thêm mới', new_product_path %></li>
+                <li><%= link_to "Xem tất cả", allproducts_path %></li>
+                <li class="divider"></li>
+              </ul>
+            </li>
+
+           <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Loại thiết bị
+                 <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'Thêm mới', newcategory_path %></li>
+                <li><%= link_to "Xem tất cả", categories_path %></li>
+              </ul>
+          </li>
+
+          <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Nhà sản xuất
+                 <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'Thêm mới', new_manufacturer_path %></li>
+                <li><%= link_to "Xem tất cả", manufacturers_path %></li>
+              </ul>
+          </li>
+            <li><%= link_to "Quản lý Thành Viên",users_path %></li>
+            <li><%= link_to "Hóa đơn",orders_path %></li>
+            <% else %>
+             <li><%= link_to "Home",'#' %></li>
+          <% end %>
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <t1><%= current_user.name %></t1>
+                 <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Profile", current_user %></li>
+                <li><%= link_to "Settings", '#' %></li>
+                <li>Point: <p2><%= current_user.point%> Point</p2></li>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to "Sign out", signout_path, method: "delete" %>
+                </li>
+              </ul>
+            </li>
+            <li><%= link_to "Nạp thẻ",napthe_path %></li>
+          <% else %>
+            <li><%= link_to "Đăng nhập", signin_path %></li>
+             <li><%= link_to "Đăng ký", signup_path %></li>
+          <% end %>
+          
+          <li><%= link_to "Giỏ hàng",mycarts_path %></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+ 

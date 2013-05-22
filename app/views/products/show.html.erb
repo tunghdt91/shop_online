@@ -1,0 +1,65 @@
+<%= link_to 'Back', products_path %> 
+<p id="notice"><%= notice %></p>
+
+<table border = "1", width = "80%", align = "center">
+  <tr height= "10px", align = "center", bgcolor = "#CCFF33">
+    <td>Category</td>
+    <td>Manufacturer</td>
+    <td>Name Product</td>
+    <td>Price</td>
+    <td>Information</td>
+  </tr>
+  <tr align = center>
+    <td><%= @product.category.name %></td>
+    <td><%= @product.manufacturer.name%></td>
+    <td><%= @product.name %></td>
+    <td><%= @product.price %></td>
+    <td><%= @product.detail %></td>
+  </tr>
+</table>
+<% if signed_in? %>
+<% if current_user.admin %>
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<% end %>
+<% end %>
+
+</br>
+<% if signed_in? %>
+<div class="cart"> <%= link_to 'Add to cart' ,  add_to_carts_path(@product),class: "btn btn-small btn-primary", method: "post",data: { confirm: 'Add to Your Cart?'}%></div>
+<%end%>
+<!--Product micropost
+Chon mot trong 2 cach deu duoc.cachh tren thi truyen ca params,cach duoi thi truyen moi id ,do vay xem lai controller ham comment-->
+
+<div class="span8">
+    <% if @product.product_microposts.any? %>
+      <h3>(<%= @product.product_microposts.count %>) Comment</h3>
+        <% @posts = @product.product_microposts.all %>
+      <% @posts.each do |m|%>
+      
+        <div class="microposts">
+          <p2><b><li>
+
+          <li><span class="content">
+            <%if signed_in?%>
+            <%= @current_user.name%></li></b></p2>
+            <%else%>
+            <li>Unknow Member</li>
+            <%end%>
+            <%= m.content %></span>
+              <span class="timestamp">
+              Posted <%= time_ago_in_words(m.created_at) %> ago.
+              </span>
+          </li>
+        </div>
+      <% end %>
+      <%else%>
+      <h3>0 Comment</h3>
+    <% end %>
+  </div>
+</div>
+
+<%= form_for :products, url: {action: "comment"} do|f| %>
+  <input type="textarea" rows="4" cols="20" name ="content" id = "content">
+  <input type="hidden" name ="id" value = <%=@product.id %>>
+  <%= f.submit "Make Comment"%>
+  <%end%>
